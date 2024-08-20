@@ -94,7 +94,8 @@ async def start(client, message):
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
         btn = [[
-            InlineKeyboardButton("❆ Jᴏɪɴ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ ❆", url=invite_link.invite_link)
+            InlineKeyboardButton("❆ Cʜᴀɴɴᴇʟ 1 ❆", url=invite_link.invite_link),
+InlineKeyboardButton("❆ Cʜᴀɴɴᴇʟ  2❆", url=https://t.me/+_OK3-BwYt48zNDVl)
         ]]
         if message.command[1] != "subscribe":
             if REQUEST_TO_JOIN_MODE == True:
