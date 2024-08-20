@@ -162,15 +162,18 @@ async def re_enable_chat(bot, message):
 
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
-    rju = await message.reply('Fetching stats..')
-    total_users = await db.total_users_count()
-    totl_chats = await db.total_chat_count()
-    files = await Media.count_documents()
-    size = await db.get_db_size()
-    free = 536870912 - size
-    size = get_size(size)
-    free = get_size(free)
-    await rju.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
+    if ADMINS:
+        safari = await message.reply('Fetching stats..')
+        total_users = await db.total_users_count()
+        totl_chats = await db.total_chat_count()
+        files = await Media.count_documents()
+        size = await db.get_db_size()
+        free = 536870912 - size
+        size = get_size(size)
+        free = get_size(free)
+        await safari.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
+    else:
+        await message.reply_sticker(sticker="CAACAgUAAxkBAAE6OsFmxL4L0Y9uzekaAq4r4kRBawn1OwACcAADaoQ8NncTXd7i23sqHgQ")
 
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
 async def gen_invite(bot, message):
