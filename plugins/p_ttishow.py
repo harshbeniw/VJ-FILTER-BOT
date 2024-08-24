@@ -162,7 +162,7 @@ async def re_enable_chat(bot, message):
 
 @Client.on_message(filters.command('stats') & filters.incoming)
 async def get_ststs(bot, message):
-    if ADMINS:
+    if message.from_user.id in ADMINS:
         safari = await message.reply('Fetching stats..')
         total_users = await db.total_users_count()
         totl_chats = await db.total_chat_count()
@@ -173,6 +173,9 @@ async def get_ststs(bot, message):
         free = get_size(free)
         await safari.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
     else:
+        safari = await message.reply('Fetching stats..')
+        await asyncio.sleep(2)
+        await safari.delete() 
         await message.reply_sticker(sticker="CAACAgUAAxkBAAE6OsFmxL4L0Y9uzekaAq4r4kRBawn1OwACcAADaoQ8NncTXd7i23sqHgQ")
 
 @Client.on_message(filters.command('invite') & filters.user(ADMINS))
